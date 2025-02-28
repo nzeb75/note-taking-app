@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Note Taker App</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Authentication container -->
+    <div id="auth-container">
+      <div id="login-form" class="auth-form">
+        <h2>Login</h2>
+        <input type="text" id="login-email" placeholder="Email" />
+        <input type="password" id="login-password" placeholder="Password" />
+        <button onclick="login()">Login</button>
+        <p>
+          Don't have an account? <a href="#" onclick="toggleAuth()">Register</a>
+        </p>
+      </div>
+
+      <div id="register-form" class="auth-form hidden">
+        <h2>Register</h2>
+        <input type="text" id="register-username" placeholder="Username" />
+        <input type="text" id="register-email" placeholder="Email" />
+        <input type="password" id="register-password" placeholder="Password" />
+        <button onclick="register()">Register</button>
+        <p>
+          Already have an account? <a href="#" onclick="toggleAuth()">Login</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Main app container - hidden until logged in -->
+    <div id="app-container" class="hidden">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <i class="fa-solid fa-clipboard"></i>
+            Note Taker
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <ul>
+            <li class="active" data-section="dashboard">
+              <i class="fa-solid fa-table-columns"></i>
+              &nbsp; Dashboard
+            </li>
+            <li data-section="notes">
+              <i class="fa-solid fa-note-sticky"></i>
+              &nbsp; Notes
+            </li>
+            <li data-section="settings">
+              <i class="fa-solid fa-gear"></i>
+              &nbsp; Settings
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+          <button onclick="logout()">
+            <i class="fa-solid fa-door-open"></i>
+            &nbsp; Logout
+          </button>
+        </div>
+      </div>
+
+      <!-- Main content sections -->
+      <div class="main-content">
+        <header>
+          <h1 id="section-title">Dashboard</h1>
+          <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search notes..." />
+          </div>
+          <div class="user-info">
+            <span id="username-display"></span>
+          </div>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="content-section">
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <h3>Total Notes</h3>
+              <p id="total-notes">0</p>
+            </div>
+            <div class="stat-card">
+              <h3>Last Updated</h3>
+              <p id="last-updated">N/A - no notes</p>
+            </div>
+          </div>
+          <div class="recent-notes">
+            <h3>Recent Notes</h3>
+            <div id="recent-notes-list">
+              <p class="empty-state">No recent notes</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Notes Section -->
+        <section id="notes-section" class="content-section hidden">
+          <div id="note-form">
+            <input type="text" id="note-title" placeholder="Note Title" />
+            <textarea id="note-content" placeholder="Note Content"></textarea>
+            <button class="primary-btn" onclick="saveNote()">Save Note</button>
+          </div>
+          <div id="notes-list"></div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings-section" class="content-section hidden">
+          <div class="settings-form">
+            <h3>Account Settings - IN PROGRESS</h3>
+            <br>
+            <div class="form-group">
+              <label>Change Username</label>
+              <input type="text" id="settings-username"/>
+            </div>
+            <div class="form-group">
+              <label>Theme</label>
+              <select id="theme-selector">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+              </select>
+            </div>
+            <button class="primary-btn">Save Settings</button>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div id="welcome-popup" class="popup hidden">
+      <div class="popup-content">
+        <h2>Welcome!</h2>
+        <p>Thank you for logging in. Start creating your notes!</p>
+        <button onclick="closeWelcomePopup()">Get Started</button>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
